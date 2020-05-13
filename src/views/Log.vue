@@ -3,10 +3,19 @@
     <h1>Daily Food Log:</h1>
     {{ log.date }}
     <form @submit.prevent="search">
-      <input v-model="query" type="text" placeholder="Search Food... " required />
+      <input
+        v-model="query"
+        type="text"
+        placeholder="Search Food... "
+        required
+      />
       <button class="btn btn-success" type="submit">Search</button>
     </form>
-    <ul>{{results}}</ul>
+    <ul>
+      {{
+        results
+      }}
+    </ul>
   </div>
 </template>
 
@@ -16,11 +25,12 @@ export default {
   name: "log",
   data() {
     return {
-      query: ""
+      query: "",
+      results: "",
     };
   },
   components: {
-    Results
+    Results,
   },
   mounted() {
     this.$store.dispatch("getActiveLog", this.$route.params.id);
@@ -28,15 +38,14 @@ export default {
   computed: {
     log() {
       return this.$store.state.activeLog;
-    }
+    },
   },
   methods: {
     search() {
       this.$store.dispatch("searchNutritionixApi", this.query);
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>
