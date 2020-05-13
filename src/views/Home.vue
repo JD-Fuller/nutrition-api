@@ -1,7 +1,7 @@
 <template>
   <div class="home container-fluid">
     <h1>
-      <img alt="Vue logo" class="img" src="../assets/logo.png" />Nutrition App
+      <img alt="Vue logo" class="img" src="../assets/logo.png" />NutritionX
     </h1>
     <form @submit.prevent="createLog">
       <input v-model="newLog.date" type="date" placeholder />
@@ -11,9 +11,7 @@
     <ul>
       <li v-for="log in logs" :key="log._id">
         <router-link :to="{ name: 'log', params: { id: log._id } }">
-          {{
-          log.date
-          }}
+          {{ log.date }}
         </router-link>
       </li>
     </ul>
@@ -31,8 +29,8 @@ export default {
       newLog: {
         date: "",
         user: "",
-        foods: []
-      }
+        foods: [],
+      },
     };
   },
   methods: {
@@ -41,19 +39,17 @@ export default {
       this.$store.dispatch("createLog", log);
       this.newLog = {
         date: "",
-        user: ""
+        user: "",
       };
-    }
+    },
   },
   computed: {
     logs() {
       return this.$store.state.logs;
-    }
-  }
+    },
+  },
 };
 </script>
-
-
 
 <style>
 .img {
