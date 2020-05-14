@@ -7,7 +7,7 @@ var _sandbox = axios.create({
   timeout: 8000,
 });
 
-var api = axios.create({
+var _api = axios.create({
   baseURL: `https://trackapi.nutritionix.com/v2/natural/nutrients`,
   timeout: 8000,
   headers: {
@@ -56,7 +56,7 @@ export default new Vuex.Store({
 
     async searchNutritionixApi({ commit, dispatch }, query) {
       debugger;
-      let res = await api.post(query);
+      let res = await _api.post("/" + query);
       debugger;
       commit("setSearchResults", res.data.results);
     },
