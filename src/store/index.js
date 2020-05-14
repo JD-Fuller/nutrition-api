@@ -2,17 +2,19 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 
-var _sandbox = axios.create({
+let _sandbox = axios.create({
   baseURL: "//bcw-sandbox.herokuapp.com/api/teamawesome",
   timeout: 8000,
 });
 
-var _api = axios.create({
-  baseURL: `https://trackapi.nutritionix.com/v2/natural/nutrients`,
+let _api = axios.create({
+  baseURL: "https://trackapi.nutritionix.com/v2/natural/nutrients",
   timeout: 8000,
   headers: {
-    "x-app-key": "27bcfa036a58c2771c65ed9dad033d5c",
     "x-app-id": "943fac47",
+    "x-app-key": "27bcfa036a58c2771c65ed9dad033d5c",
+    "Content-Type": "application/json",
+    "x-remote-user-id": 0,
   },
 });
 
@@ -56,9 +58,14 @@ export default new Vuex.Store({
 
     async searchNutritionixApi({ commit, dispatch }, query) {
       debugger;
-      let res = await _api.post("/" + query);
+      let res = await _api.post(query);
       debugger;
-      commit("setSearchResults", res.data.results);
+      try {
+        console.log("From post request to api", res.data.results);
+        commit("setSearchResults", res.data.results);
+      } catch (error) {
+        console.error("this did not work out the way you intended");
+      }
     },
   },
   modules: {},

@@ -1,13 +1,16 @@
 <template>
   <div class="results container-fluid">
     RESULTS HERE
-    {{ food.food_name }}
+    {{ foods }}
   </div>
 </template>
 
 <script>
 export default {
   name: "Results",
+  mounted() {
+    this.$store.dispatch("getActiveLog", this.$route.params.id);
+  },
   computed: {
     foods() {
       return this.$store.state.searchResults;
